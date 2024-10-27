@@ -1,20 +1,16 @@
-package com.emanuelpontes.crmtest.global.servico;
+package com.emanuelpontes.crmtest.global.service;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.emanuelpontes.crmtest.global.erros.AplicationException;
+import com.emanuelpontes.crmtest.global.errors.ApplicationException;
 import com.emanuelpontes.crmtest.global.model.db.IBaseModel;
 
 
@@ -51,11 +47,8 @@ public abstract class ServiceCrudBase<T extends JpaRepository<E, C>, E extends I
 
 	@Transactional
 	public E create(E entity) {
-		// validate o objeto a ser incluido
 		validate(entity);
-		// faz algum tratamento antes de persistir no banco
 		entity = prePersistency(entity);
-		// inclui objeto na base e retorna o resultado
 		E result = repository.save(entity);
 		triggerChangeEvent(result);
 		return result;
@@ -64,7 +57,6 @@ public abstract class ServiceCrudBase<T extends JpaRepository<E, C>, E extends I
 	@Transactional
 	public List<E> saveBatch(List<E> entitys) {
 
-		// validate os objetos a ser incluido
 		for (E entity : entitys) {
 			validate(entity);
 		}
@@ -86,13 +78,11 @@ public abstract class ServiceCrudBase<T extends JpaRepository<E, C>, E extends I
 	}
 	@Transactional
 	public E edit(E entity) {
-		// valida objeto a ser atualizado
 		validate(entity);
-		// faz algum tratamento antes de persistir no banco
 		entity = prePersistency(entity);
 		E _entity = repository.findById((C)entity.getId()).orElse(null);
 		if (_entity == null) {
-			throw new AplicationException("Object not found");
+			throw new ApplicationException("Object not found");
 		}
 		E result = repository.save(entity);
 		triggerChangeEvent(result);
@@ -150,7 +140,6 @@ public abstract class ServiceCrudBase<T extends JpaRepository<E, C>, E extends I
 	@Transactional
 	public Boolean deleteBatch(List<E> entitys) {
 
-		// validate os objetos a ser incluido
 		for (E entity : entitys) {
 			validateToDelete(entity);
 		}

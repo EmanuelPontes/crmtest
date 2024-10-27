@@ -1,4 +1,4 @@
-package com.emanuelpontes.crmtest.global.servico;
+package com.emanuelpontes.crmtest.global.service;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;

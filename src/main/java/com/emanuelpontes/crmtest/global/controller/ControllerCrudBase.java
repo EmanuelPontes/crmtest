@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.emanuelpontes.crmtest.global.model.db.IBaseModel;
-import com.emanuelpontes.crmtest.global.servico.IServiceCrudBase;
+import com.emanuelpontes.crmtest.global.service.IServiceCrudBase;
 
 import jakarta.servlet.http.HttpServletRequest;
 
 /*
- 	@param <S> Classe do serviço da classe a ser controlada.
-	@param <E> Classe da entidade a ser manipulada.
-	@param <C> Classe do tipo de dado do id da classe a ser manipulada.
+ 	@param <S> Service class.
+	@param <E> Entity class.
+	@param <C> Id class
 */
 public abstract class ControllerCrudBase<S extends IServiceCrudBase<E, C>, E extends IBaseModel, C> {
 

@@ -8,7 +8,7 @@ import com.emanuelpontes.crmtest.api.customer.entity.Customer;
 import com.emanuelpontes.crmtest.api.customer.event.CustomerDeleteEvent;
 import com.emanuelpontes.crmtest.api.customer.event.CustomerEvent;
 import com.emanuelpontes.crmtest.api.customer.repository.CustomerRepository;
-import com.emanuelpontes.crmtest.global.servico.ServiceCrudBase;
+import com.emanuelpontes.crmtest.global.service.ServiceCrudBase;
 
 @Service
 public class CustomerService extends ServiceCrudBase<CustomerRepository, Customer, Long> {

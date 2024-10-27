@@ -1,4 +1,4 @@
-package com.emanuelpontes.crmtest.global.erros;
+package com.emanuelpontes.crmtest.global.errors;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,8 +45,8 @@ public class SystemExceptionHandler extends ResponseEntityExceptionHandler{
 	
 	
 	//Usado para emitir qualquer erro de validação
-	@ExceptionHandler({ AplicationException.class })
-	public ResponseEntity<Object> sistemaException(AplicationException ex) {
+	@ExceptionHandler({ ApplicationException.class })
+	public ResponseEntity<Object> sistemaException(ApplicationException ex) {
 		String mensagemUsuario = ex.getMessage();
 		String mensagemDesenvolvedor = ex.toString();
 		List<SystemError> erros = Arrays.asList(new SystemError(mensagemUsuario, mensagemDesenvolvedor));

@@ -4,10 +4,11 @@ import java.time.Duration;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.reactive.function.client.ExchangeFilterFunction;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import com.emanuelpontes.crmtest.global.erros.AplicationException;
+import com.emanuelpontes.crmtest.global.errors.ApplicationException;
 
 import reactor.core.publisher.Mono;
 import reactor.util.retry.Retry;
@@ -60,9 +61,9 @@ public class WebClientConfig {
     }
 
     public static Retry retrySpec() {
-        return Retry.backoff(3, Duration.ofSeconds(1))
+        return Retry.backoff(3, Duration.ofSeconds(10))
                 .filter(throwable -> throwable instanceof RuntimeException)  
                 .onRetryExhaustedThrow((retryBackoffSpec, retrySignal) -> 
-                    new AplicationException("The number of retries have been exhausted"));
+                    new ApplicationException("The number of retries have been exhausted"));
     }
 }

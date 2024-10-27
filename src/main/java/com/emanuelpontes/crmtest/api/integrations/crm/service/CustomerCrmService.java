@@ -25,7 +25,7 @@ import com.emanuelpontes.crmtest.api.customer.repository.CustomerRepository;
 import com.emanuelpontes.crmtest.api.integrations.crm.model.CustomerCRM;
 import com.emanuelpontes.crmtest.api.integrations.facade.ICrmIntegration;
 import com.emanuelpontes.crmtest.config.WebClientConfig;
-import com.emanuelpontes.crmtest.global.erros.AplicationException;
+import com.emanuelpontes.crmtest.global.errors.ApplicationException;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import reactor.core.publisher.Flux;
@@ -139,6 +139,8 @@ public class CustomerCrmService implements ICrmIntegration{
         .body(BodyInserters.fromValue(new CustomerCRM(customer)))
         .retrieve()
         .bodyToMono(CustomerCRM.class)
+        .onErrorResume(Mono::error)
+        .retryWhen(WebClientConfig.retrySpec())
         .doOnError(e -> log.error("Erro while syncing ", e));
     }
 }
