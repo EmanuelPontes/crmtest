@@ -5,6 +5,7 @@ import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
+import com.emanuelpontes.crmtest.api.customer.event.CustomerDeleteEvent;
 import com.emanuelpontes.crmtest.api.customer.event.CustomerEvent;
 import com.emanuelpontes.crmtest.api.integrations.crm.model.CustomerCRM;
 import com.emanuelpontes.crmtest.api.integrations.crm.service.CustomerCrmService;
@@ -21,4 +22,12 @@ public class CustomerEventHandler {
     public void handleCustomerEvent(CustomerEvent event) {
         crmService.patchCustomer(new CustomerCRM(event.getCustomer()));
     }
+
+    @Async
+	@EventListener
+    public void handleCustomerDeleteEvent(CustomerDeleteEvent event) {
+        crmService.deleteCustomer(event.getId());
+    }
+
+    
 }

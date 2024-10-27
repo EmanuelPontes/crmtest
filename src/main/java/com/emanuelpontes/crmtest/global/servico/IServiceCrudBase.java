@@ -28,9 +28,7 @@ public interface IServiceCrudBase<E extends IBaseModel, C> {
 	void validateToDelete(E entity) ;
 	E prePersistency(E entity);
 	Object list() ;
-	Object pesquisa(Optional<String> valor, Optional<Integer> limite) ;
-	Object pesquisa(Optional<String> valor, Optional<String> codigo, Optional<String> descricao, Optional<Integer> limite) ;
-	Object pesquisa(Optional<String> valor, Optional<String> codigo, Optional<String> identificador, Optional<String> descricao, Optional<Integer> limite) ;
 	E searchById(C id) ;
-	void triggerEvent(E entity);
+	void triggerChangeEvent(E entity);
+	void triggerDeleteEvent(C id);
 }

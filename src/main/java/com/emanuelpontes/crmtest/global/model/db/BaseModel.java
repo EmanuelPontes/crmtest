@@ -11,7 +11,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
-
+import lombok.Data;
+@Data
 @MappedSuperclass
 public class BaseModel<ID extends Serializable> implements IBaseModel, Serializable {
 
@@ -21,11 +22,15 @@ public class BaseModel<ID extends Serializable> implements IBaseModel, Serializa
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Long id;
 
-	public Long getId() {
-		return id;
-	}
+	@Column(nullable = false, updatable = false)
+	protected LocalDateTime createdAt;
 
-	public void setId(Long id) {
-		this.id = id;
+	@Column
+	@LastModifiedDate
+	protected LocalDateTime updatedAt;
+
+	@SuppressWarnings("static-access")
+	public BaseModel() {
+		this.createdAt = LocalDateTime.now();
 	}
 }

@@ -57,7 +57,7 @@ public abstract class ServiceCrudBase<T extends JpaRepository<E, C>, E extends I
 		entity = prePersistency(entity);
 		// inclui objeto na base e retorna o resultado
 		E result = repository.save(entity);
-		triggerEvent(result);
+		triggerChangeEvent(result);
 		return result;
 	}
 
@@ -95,7 +95,7 @@ public abstract class ServiceCrudBase<T extends JpaRepository<E, C>, E extends I
 			throw new AplicationException("Object not found");
 		}
 		E result = repository.save(entity);
-		triggerEvent(result);
+		triggerChangeEvent(result);
 		return result;
 	}
 
@@ -127,20 +127,6 @@ public abstract class ServiceCrudBase<T extends JpaRepository<E, C>, E extends I
 		return pageRequest;
 	}
 
-	public Object pesquisa(Optional<String> valor, Optional<Integer> limite) {
-		throw new AplicationException("Unsupported method");
-	}
-
-	public Object pesquisa(Optional<String> valor, Optional<String> codigo, Optional<String> descricao,
-			Optional<Integer> limite) {
-		throw new AplicationException("Unsupported method");
-	}
-
-	public Object pesquisa(Optional<String> valor, Optional<String> codigo, Optional<String> identificador,
-			Optional<String> descricao, Optional<Integer> limite) {
-		throw new AplicationException("Unsupported method");
-	}
-
 	@Transactional
 	public Boolean delete(C id) {
 		// valida objeto a ser removido
@@ -148,12 +134,7 @@ public abstract class ServiceCrudBase<T extends JpaRepository<E, C>, E extends I
 		repository.findById(id).ifPresent(e -> repository.deleteById(id));
 		// executa métod para remover objeto da base de dados
 		// retorna verdadeiro se ñ ocorreu nenhum erro
-		return true;
-	}
-	
-	
-	@Transactional
-	public Boolean alteraStatusParaRemovido(C id) {
+		triggerDeleteEvent(id);
 		return true;
 	}
 	

@@ -24,7 +24,13 @@ router.put('/crm/customer', async (req, res) => {
                 location   
             })
 
-            res.status(201).json(newUser);
+            res.status(201).json({
+                customerId: newUser.id,
+                fullName,         
+                contactEmail,       
+                primaryPhone,       
+                location
+            });
         } else {
             const [updatedRows] = await customerRepo.update(
                 {
