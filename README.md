@@ -58,5 +58,19 @@ SWAGGER URL FOR THE Integration API
 
 http://localhost:8080/swagger-ui/index.html
 
+How to run the project:
 
-
+First crm-test: 
+    Create the docker image using the following command:
+        docker build -t crm-test .
+    Run the container with:
+        docker run -p 8080:8080 crm-test 
+    Use the swagger-ui for calling the apis and create a customer:
+        http://localhost:8080/swagger-ui/index.html
+Second Mock CRM API
+    Go to the ./crm folder and run the following:
+    
+    Create the docker image using the following command:
+        docker build -t crm-api .
+    Run the container with:
+        docker run -p 3000:300 crm-api 
