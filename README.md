@@ -67,10 +67,12 @@ First crm-test:
         docker run -p 8080:8080 crm-test 
     Use the swagger-ui for calling the apis and create a customer:
         http://localhost:8080/swagger-ui/index.html
+
 Second Mock CRM API
     Go to the ./crm folder and run the following:
-    
+
     Create the docker image using the following command:
         docker build -t crm-api .
     Run the container with:
-        docker run -p 3000:300 crm-api 
+        docker run -p 3000:3000 crm-api 
+P.S: The application.properties, property crm.integration.base.url must have value http://host.docker.internal:3000/
