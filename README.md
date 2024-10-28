@@ -40,7 +40,7 @@ You are tasked with developing an integration solution for a retail company that
 ## Proposed Solution for Each Requirement
 
 ### Microservice Design
-I implemented a set of Java abstract classes commonly used in my projects to handle CRUD operations across both controller and service layers. These can be found in the `com.emanuelpontes.crmtest.global.controller` and `com.emanuelpontes.crmtest.global.service` packages.
+I implemented a set of Java abstract classes commonly used in my projects to handle CRUD operations across both controller and service layers. These can be found in the `com.emanuelpontes.crmtest.global.controller` and `com.emanuelpontes.crmtest.global.service` packages. I'm using the embedded Spring H2 database.
 
 ### CRM Mock Service
 I created a Node.js backend using SQLite as the database to act as the CRM mock service, which is located in the `./crm` folder.
@@ -68,7 +68,7 @@ I created a set of error exceptions and handlers in the Global package for handl
     docker run -p 8080:8080 crm-test
 2. **CRUD Customer service**:
     http://localhost:8080/swagger-ui/index.html
-    
+
 ### Second: Mock CRM Test API
 1. **Build the Docker Image**:
     ```bash
