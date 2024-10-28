@@ -75,4 +75,6 @@ Second Mock CRM API
         docker build -t crm-api .
     Run the container with:
         docker run -p 3000:3000 crm-api 
+    to verify if the customer was persisted successfully call http://localhost:3000/crm/customer/one-by-id/:id api
+    
 P.S: The application.properties, property crm.integration.base.url must have value http://host.docker.internal:3000/
